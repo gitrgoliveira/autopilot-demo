@@ -44,7 +44,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+          image: "hashicorp/consul-enterprise:latest"
           env:
             - name: POD_IP
               valueFrom:
@@ -135,7 +135,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: consul-consul-server-backup
+  name: consul-consul-server-A
   namespace: default
   labels:
     app: consul
@@ -175,7 +175,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+          image: "hashicorp/consul-enterprise:latest"
           env:
             - name: POD_IP
               valueFrom:
@@ -272,7 +272,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: consul-consul-server-backup2
+  name: consul-consul-server-B
   namespace: default
   labels:
     app: consul
@@ -312,7 +312,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+          image: "hashicorp/consul-enterprise:latest"
           env:
             - name: POD_IP
               valueFrom:
