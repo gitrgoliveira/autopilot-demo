@@ -27,3 +27,4 @@ The idea of this repo is to demo auto pilot using k8s helm chart for Consul.
 1. `kubectl delete -f extras/`
 2. `kubectl delete -f manifests/consul/templates/`
 3. `kubectl get pvc | grep consul | awk '{print $1}' | xargs kubectl delete pvc`
+4. `kubectl get pv | grep consul | awk '{print $1}' | xargs kubectl delete pv`
