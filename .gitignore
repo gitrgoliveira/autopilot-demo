@@ -1,0 +1,4 @@
+consul-helm
+consul-helm/*
+manifests/*
+.DS_Store
