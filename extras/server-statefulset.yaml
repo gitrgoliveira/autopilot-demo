@@ -135,7 +135,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: consul-consul-server-A
+  name: consul-consul-server-a
   namespace: default
   labels:
     app: consul
@@ -272,7 +272,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: consul-consul-server-B
+  name: consul-consul-server-b
   namespace: default
   labels:
     app: consul
