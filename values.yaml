@@ -331,7 +331,7 @@ client:
   # clients, so will inherit the clients' nodeSelector, tolerations and affinity.
   # This is an Enterprise feature only.
   snapshotAgent:
-    enabled: false
+    enabled: true
 
     # replicas determines how many snapshot agent pods are created
     replicas: 2
@@ -344,8 +344,8 @@ client:
     # To create a secret:
     # https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-using-kubectl-create-secret
     configSecret:
-      secretName: null
-      secretKey: null
+      secretName: snapshot-agent-config
+      secretKey: snaphshot_agent.hcl
 
 # Configuration for DNS configuration within the Kubernetes cluster.
 # This creates a service that routes to all agents (client or server)
