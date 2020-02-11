@@ -30,8 +30,8 @@ global:
   #   image: "consul:1.5.0"
   #   # Consul Enterprise 1.5.0
   #   image: "hashicorp/consul-enterprise:1.5.0-ent"
-  # image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
-  image: "hashicorp/consul-enterprise:latest"
+  image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+  # image: "hashicorp/consul-enterprise:latest"
 
   # imageK8S is the name (and tag) of the consul-k8s Docker image that
   # is used for functionality such as catalog sync. This can be overridden
@@ -354,13 +354,12 @@ client:
 # for this to have any effect:
 # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#configure-stub-domain-and-upstream-dns-servers
 dns:
-  enabled: "-"
+  enabled: false
 
   # Set a predefined cluster IP for the DNS service.
   # Useful if you need to reference the DNS service's IP
   # address in CoreDNS config.
-  clusterIP: null
-
+  clusterIP: "10.96.146.117"
   # Extra annotations to attach to the dns service
   # This should be a multi-line string of
   # annotations to apply to the dns Service
@@ -400,14 +399,14 @@ ui:
 syncCatalog:
   # True if you want to enable the catalog sync. Set to "-" to inherit from
   # global.enabled.
-  enabled: false
+  enabled: true
   image: null
   default: true # true will sync by default, otherwise requires annotation
 
   # toConsul and toK8S control whether syncing is enabled to Consul or K8S
   # as a destination. If both of these are disabled, the sync will do nothing.
   toConsul: true
-  toK8S: true
+  toK8S: false
 
   # k8sPrefix is the service prefix to prepend to services before registering
   # with Kubernetes. For example "consul-" will register all services
@@ -435,7 +434,7 @@ syncCatalog:
   # consulPrefix is ignored when 'annotationServiceName' is provided.
   # NOTE: Updating this property to a non-null value for an existing installation will result in deregistering
   # of existing services in Consul and registering them with a new name.
-  consulPrefix: null
+  consulPrefix: "k8s-"
 
   # k8sTag is an optional tag that is applied to all of the Kubernetes services
   # that are synced into Consul. If nothing is set, defaults to "k8s".
@@ -683,15 +682,15 @@ meshGateway:
   # By default, we set an anti affinity so that two gateway pods won't be
   # on the same node. NOTE: Gateways require that Consul client agents are
   # also running on the nodes alongside each gateway Pod.
-  affinity: |
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app: {{ template "consul.name" . }}
-              release: "{{ .Release.Name }}"
-              component: mesh-gateway
-          topologyKey: kubernetes.io/hostname
+  # affinity: |
+  #   podAntiAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       - labelSelector:
+  #           matchLabels:
+  #             app: {{ template "consul.name" . }}
+  #             release: "{{ .Release.Name }}"
+  #             component: mesh-gateway
+  #         topologyKey: kubernetes.io/hostname
 
   # Optional YAML string to specify tolerations.
   tolerations: null
