@@ -26,7 +26,7 @@
       "path": "/tmp/"
     }
   },
-  "other_examples" : {
+  "other_storage_examples" : {
     "aws_storage": {
       "access_key_id": "",
       "secret_access_key": "",

@@ -44,7 +44,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:latest"
+          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
           env:
             - name: POD_IP
               valueFrom:
@@ -74,9 +74,8 @@ spec:
                 -ui \
                 -node-meta=zone:main \
                 -retry-join=${CONSUL_FULLNAME}-server-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-backup-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-backup-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
+                -retry-join=${CONSUL_FULLNAME}-server-a-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
+                -retry-join=${CONSUL_FULLNAME}-server-b-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
                 -server
           volumeMounts:
             - name: data-default
@@ -175,7 +174,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:latest"
+          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
           env:
             - name: POD_IP
               valueFrom:
@@ -203,11 +202,10 @@ spec:
                 -domain=consul \
                 -hcl="connect { enabled = true }" \
                 -ui \
-                -node-meta=zone:backup \
+                -node-meta=zone:zone_a \
                 -retry-join=${CONSUL_FULLNAME}-server-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-backup-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-backup-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
+                -retry-join=${CONSUL_FULLNAME}-server-a-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
+                -retry-join=${CONSUL_FULLNAME}-server-b-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
                 -server
           volumeMounts:
             - name: data-default
@@ -312,7 +310,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:latest"
+          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
           env:
             - name: POD_IP
               valueFrom:
@@ -340,11 +338,10 @@ spec:
                 -domain=consul \
                 -hcl="connect { enabled = true }" \
                 -ui \
-                -node-meta=zone:backup2 \
+                -node-meta=zone:zone_b \
                 -retry-join=${CONSUL_FULLNAME}-server-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-backup-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
-                -retry-join=${CONSUL_FULLNAME}-server-backup-1.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
+                -retry-join=${CONSUL_FULLNAME}-server-a-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
+                -retry-join=${CONSUL_FULLNAME}-server-b-0.${CONSUL_FULLNAME}-server.${NAMESPACE}.svc \
                 -server
           volumeMounts:
             - name: data-default

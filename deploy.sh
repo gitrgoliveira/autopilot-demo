@@ -18,6 +18,9 @@ kubectl create secret generic snapshot-agent-config  --from-file=./snaphshot_age
 kubectl apply -f manifests/consul/templates/
 kubectl apply -f extras/
 
-# kubectl -n default port-forward svc/consul-consul-server  8500:8500 &
-# open http://127.0.0.1:8500
+
+sleep 30
+kubectl -n default port-forward svc/consul-consul-server 8600:8600 &
+kubectl -n default port-forward svc/consul-consul-server 8500:8500 &
+open http://127.0.0.1:8500
 
