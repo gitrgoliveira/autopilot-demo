@@ -44,7 +44,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+          image: "hashicorp/consul-enterprise:1.7-ent"
           env:
             - name: POD_IP
               valueFrom:
@@ -174,7 +174,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+          image: "hashicorp/consul-enterprise:1.7-ent"
           env:
             - name: POD_IP
               valueFrom:
@@ -310,7 +310,7 @@ spec:
             name: consul-consul-server-config
       containers:
         - name: consul
-          image: "hashicorp/consul-enterprise:1.7.0-ent-beta4"
+          image: "hashicorp/consul-enterprise:1.7-ent"
           env:
             - name: POD_IP
               valueFrom:
