@@ -14,6 +14,13 @@ metadata:
 data:
   extra_config.json: |-
     {
+      "dns_config": {
+        "service_ttl": {
+          "*": "1s"
+        },
+        "node_ttl": "1s",
+        "prefer_namespace": true
+      },
       "autopilot" : {
         "cleanup_dead_servers": true,
         "last_contact_threshold": "200ms",
