@@ -28,7 +28,7 @@ It has been optimised to run on Minikube
    1. `cat licenses.hcli | consul license put -`
 2. Run `configure.sh`, which will delete the existing snapshot pods to initialise them
    1. `kubectl get pods | grep snapshot | awk '{print $1}' | xargs kubectl delete pod`
-3. Check for the existence of a lock on Consul UI and .
+3. Check for the existence of a lock on Consul UI.
    1. http://127.0.0.1:8500/ui/dc1/kv/consul-snapshot/lock/edit
 4. Check the snapshot agents are saving the snapshot, by exposing their logs.
    1. `kubectl get pods | grep snapshot | awk '{print "kubectl logs " $1}' | bash`
