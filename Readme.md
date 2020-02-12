@@ -33,7 +33,7 @@ It has been optimised to run on Minikube
 4. Check the snapshot agents are saving the snapshot, by exposing their logs.
    1. `kubectl get pods | grep snapshot | awk '{print "kubectl logs " $1}' | bash`
 
-*Note: Consul Snaphost Agent does not work with Consul Enterprise embedded license.*
+*Note: Consul Snapshot Agent does not work with Consul Enterprise embedded license.*
 *Any issues, just invalidate the lock session and check the logs again*
 
 ## Consul Namespaces
