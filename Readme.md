@@ -16,10 +16,9 @@ It has been optimised to run on Minikube
 
 ## Autopilot demo
 1. Split you terminal into several windows windows
-   1. Connect to your Consul cluster with `kubectl -n default port-forward svc/consul-consul-server 8500:8500` (this can be hidden away)
-   2. `watch -n1 consul operator raft list-peers -stale`
-   3. `watch -n1 consul members`
-   4. `watch -n1 kubectl get pods`
+   1. `watch -n1 consul operator raft list-peers -stale`
+   2. `watch -n1 consul members`
+   3. `watch -n1 kubectl get pods`
 2. Use `kubectl delete pod` to do your demo and see the changes happening. Followers will become voters if a non-voter gets deleted and new leaders will be elected.
 
 ## Snapshot agent
@@ -38,7 +37,7 @@ It has been optimised to run on Minikube
 
 ## Consul Namespaces
 
-1. Run `configure.sh`, which will delete the existing snapshot pods and setup 2 namespaces with 2 servies in each.
+1. Run `configure.sh`, which will delete the existing snapshot pods and setup 2 namespaces with 2 services in each.
 2. You can run queries on those services using:
    1. `dig @127.0.0.1 -p 8600 +tcp prometheus.service.ops-team.consul`
    2. `dig @127.0.0.1 -p 8600 +tcp fabulous_frontend.service.app-team.consul`
