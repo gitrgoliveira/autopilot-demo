@@ -3,24 +3,34 @@
 set -e
 set -o pipefail
 
-# minikube start
+# if using minikube
+minikube start
 
-rm -rf manifests
-mkdir manifests
+CONSUL_HELM_VERSION=0.20.1
+helm repo add hashicorp https://helm.releases.hashicorp.com
+helm install consul hashicorp/consul --version $CONSUL_HELM_VERSION  -f values.yaml || true
 
-helm template -n consul ./consul-helm/ -f values.yaml --output-dir ./manifests
+#------------------------------
+# to check what consul-helm applies to the cluster.
+# rm -rf manifests
+# mkdir manifests
+# helm template consul hashicorp/consul --version $CONSUL_HELM_VERSION -f values.yaml  --output-dir ./manifests
 
 if kubectl get secret snapshot-agent-config ; then
     kubectl delete secret snapshot-agent-config
 fi
 kubectl create secret generic snapshot-agent-config  --from-file=./snaphshot_agent.hcl
 
-kubectl apply -f manifests/consul/templates/
 kubectl apply -f extras/
 
+sleep 5 # giving it a few seconds for k8s to start building the pods
 
-sleep 30
-kubectl -n default port-forward svc/consul-consul-server 8600:8600 &
-kubectl -n default port-forward svc/consul-consul-server 8500:8500 &
+kubectl wait --for=condition=ready --timeout=1m pod/consul-consul-server-a-0
+kubectl wait --for=condition=ready --timeout=1m pod/consul-consul-server-a-1
+kubectl wait --for=condition=ready --timeout=1m pod/consul-consul-server-b-0
+kubectl wait --for=condition=ready --timeout=1m pod/consul-consul-server-b-1
+
+kubectl port-forward svc/consul-consul-server 8600:8600 &
+kubectl port-forward svc/consul-consul-server 8500:8500 &
 open http://127.0.0.1:8500
 
