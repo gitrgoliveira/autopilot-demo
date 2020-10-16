@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 
 # if using minikube
-minikube start
+minikube start --vm=true --driver=hyperkit --cpus=4
 
 CONSUL_HELM_VERSION=0.20.1
 helm repo add hashicorp https://helm.releases.hashicorp.com
